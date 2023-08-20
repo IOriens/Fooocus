@@ -1,3 +1,27 @@
+### 1.0.38
+
+* Update dependency, update to sampler.
+
+### 1.0.37
+
+* Cinematic-default v2.
+
+### 1.0.36
+
+* Change gaussian kernel to anisotropic kernel.
+
+### 1.0.34
+
+* Random seed restoring.
+
+### 1.0.33
+
+* Hide items in log when images are removed.
+
+### 1.0.32
+
+* Fooocus private log
+
 ### 1.0.31
 
 * Fix typo and UI.

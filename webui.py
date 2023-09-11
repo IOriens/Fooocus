@@ -55,10 +55,10 @@ with shared.gradio_root:
                 advanced_checkbox = gr.Checkbox(label='Advanced', value=False, container=False)
         with gr.Column(scale=0.5, visible=False) as right_col:
             with gr.Tab(label='Setting'):
-                performance_selction = gr.Radio(label='Performance', choices=['Speed', 'Quality'], value='Quality')
+                performance_selction = gr.Radio(label='Performance', choices=['Speed', 'Quality'], value='Speed')
                 aspect_ratios_selction = gr.Radio(label='Aspect Ratios (width × height)', choices=list(aspect_ratios.keys()),
                                                   value='896×1152')
-                image_number = gr.Slider(label='Image Number', minimum=1, maximum=32, step=1, value=4)
+                image_number = gr.Slider(label='Image Number', minimum=1, maximum=32, step=1, value=2)
                 negative_prompt = gr.Textbox(label='Negative Prompt', show_label=True, placeholder="Type prompt here.")
                 seed_random = gr.Checkbox(label='Random', value=True)
                 image_seed = gr.Number(label='Seed', value=0, precision=0, visible=False)
@@ -76,7 +76,7 @@ with shared.gradio_root:
 
             with gr.Tab(label='Style'):
                 style_selction = gr.Radio(show_label=False, container=True,
-                                          choices=style_keys, value='None')
+                                          choices=style_keys, value='None', elem_classes='style_row')
             with gr.Tab(label='Advanced'):
                 with gr.Row():
                     base_model = gr.Dropdown(label='SDXL Base Model', choices=modules.path.model_filenames, value=modules.path.default_base_model_name, show_label=True)
@@ -85,7 +85,9 @@ with shared.gradio_root:
                     lora_ctrls = []
                     for i in range(5):
                         with gr.Row():
-                            lora_model = gr.Dropdown(label=f'SDXL LoRA {i+1}', choices=['None'] + modules.path.lora_filenames, value=modules.path.lora_filenames[i])
+                            # value=modules.path.default_lora_name if i == 0 else 'None'
+                            # value=modules.path.lora_filenames[i]
+                            lora_model = gr.Dropdown(label=f'SDXL LoRA {i+1}', choices=['None'] + modules.path.lora_filenames, value=modules.path.default_lora_name if i == 0 else 'None')
                             lora_weight = gr.Slider(label='Weight', minimum=-2, maximum=2, step=0.01, value=modules.path.default_lora_weight)
                             lora_ctrls += [lora_model, lora_weight]
                 with gr.Row():

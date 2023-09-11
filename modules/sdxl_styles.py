@@ -1,3 +1,6 @@
+from modules.util import join_prompts
+
+
 # https://github.com/twri/sdxl_prompt_styler/blob/main/sdxl_styles.json
 
 styles = [
@@ -959,6 +962,11 @@ SD_XL_BASE_RATIOS = {
 aspect_ratios = {str(v[0]) + '×' + str(v[1]): v for k, v in SD_XL_BASE_RATIOS.items()}
 
 
-def apply_style(style, positive, negative):
+def apply_style_positive(style, txt):
     p, n = styles.get(style, default_style)
-    return p.replace('{prompt}', positive), n + ', ' + negative
+    return p.replace('{prompt}', txt)
+
+
+def apply_style_negative(style, txt):
+    p, n = styles.get(style, default_style)
+    return join_prompts(n, txt)
